@@ -20,7 +20,7 @@ import {HeaderComponent} from './header.component';
 import {AuthService} from "../auth/auth.service";
 import {of} from "rxjs/internal/observable/of";
 import {RouterTestingModule} from "@angular/router/testing";
-import {scheduled} from "rxjs";
+import {ProfileService} from "../profile/profile.service";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -41,6 +41,22 @@ describe('HeaderComponent', () => {
               let authServiceMock = new AuthService(null, null);
               spyOn(authServiceMock, "getAuthenticationStatus").and.returnValue(of("Anonymous"));
               return authServiceMock;
+            }
+          },
+          {
+            provide: ProfileService,
+            useFactory: ()=>{
+              let profileService = new ProfileService(null, null);
+              spyOn(profileService, "load").and.returnValue(of({
+                userHandle: "userHandle",
+                firstName: "firstName",
+                lastName: "lastName",
+                emailAddress: "dummy@example.com",
+                password: "password",
+                authenticators:  [],
+                singleFactorAuthenticationAllowed: true
+              }));
+              return profileService;
             }
           }
         ]

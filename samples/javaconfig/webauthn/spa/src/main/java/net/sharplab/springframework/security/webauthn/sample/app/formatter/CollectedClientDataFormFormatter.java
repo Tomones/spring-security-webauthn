@@ -17,7 +17,7 @@
 package net.sharplab.springframework.security.webauthn.sample.app.formatter;
 
 import com.webauthn4j.data.client.CollectedClientData;
-import net.sharplab.springframework.security.webauthn.converter.Base64UrlStringToCollectedClientDataConverter;
+import org.springframework.security.webauthn.converter.Base64UrlStringToCollectedClientDataConverter;
 import net.sharplab.springframework.security.webauthn.sample.app.api.CollectedClientDataForm;
 import org.springframework.format.Formatter;
 

@@ -18,13 +18,11 @@ package net.sharplab.springframework.security.webauthn.sample.app.config;
 
 import com.webauthn4j.data.PublicKeyCredentialType;
 import com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier;
-import com.webauthn4j.data.extension.client.RegistrationExtensionClientInput;
 import com.webauthn4j.data.extension.client.SupportedExtensionsExtensionClientInput;
 import com.webauthn4j.validator.WebAuthnAuthenticationContextValidator;
-import net.sharplab.springframework.security.webauthn.authenticator.WebAuthnAuthenticatorService;
-import net.sharplab.springframework.security.webauthn.config.configurers.WebAuthnAuthenticationProviderConfigurer;
-import net.sharplab.springframework.security.webauthn.config.configurers.WebAuthnConfigurer;
-import net.sharplab.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
+import org.springframework.security.webauthn.authenticator.WebAuthnAuthenticatorService;
+import org.springframework.security.webauthn.config.configurers.WebAuthnAuthenticationProviderConfigurer;
+import org.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -43,8 +41,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-import static net.sharplab.springframework.security.webauthn.config.configurers.WebAuthnConfigurer.webAuthn;
-import static net.sharplab.springframework.security.webauthn.config.configurers.WebAuthnLoginConfigurer.webAuthnLogin;
+import static org.springframework.security.webauthn.config.configurers.WebAuthnConfigurer.webAuthn;
+import static org.springframework.security.webauthn.config.configurers.WebAuthnLoginConfigurer.webAuthnLogin;
 
 
 /**

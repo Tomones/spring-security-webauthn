@@ -23,9 +23,9 @@ import com.webauthn4j.converter.util.JsonConverter;
 import com.webauthn4j.data.attestation.AttestationObject;
 import com.webauthn4j.data.client.CollectedClientData;
 import net.sharplab.springframework.security.fido.server.validator.ServerPublicKeyCredentialValidator;
-import net.sharplab.springframework.security.webauthn.WebAuthnRegistrationRequestValidator;
-import net.sharplab.springframework.security.webauthn.authenticator.WebAuthnAuthenticator;
-import net.sharplab.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
+import org.springframework.security.webauthn.WebAuthnRegistrationRequestValidator;
+import org.springframework.security.webauthn.authenticator.WebAuthnAuthenticator;
+import org.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.Assert;
 

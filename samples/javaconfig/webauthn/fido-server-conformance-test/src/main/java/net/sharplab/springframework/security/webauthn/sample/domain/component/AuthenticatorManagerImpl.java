@@ -16,7 +16,7 @@
 
 package net.sharplab.springframework.security.webauthn.sample.domain.component;
 
-import net.sharplab.springframework.security.webauthn.exception.CredentialIdNotFoundException;
+import org.springframework.security.webauthn.exception.CredentialIdNotFoundException;
 import net.sharplab.springframework.security.webauthn.sample.domain.entity.AuthenticatorEntity;
 import net.sharplab.springframework.security.webauthn.sample.domain.repository.AuthenticatorEntityRepository;
 import org.slf4j.Logger;

@@ -18,8 +18,8 @@ package net.sharplab.springframework.security.webauthn.sample.app.config;
 
 import com.webauthn4j.converter.util.CborConverter;
 import com.webauthn4j.converter.util.JsonConverter;
-import net.sharplab.springframework.security.webauthn.converter.Base64UrlStringToAttestationObjectConverter;
-import net.sharplab.springframework.security.webauthn.converter.Base64UrlStringToCollectedClientDataConverter;
+import org.springframework.security.webauthn.converter.Base64UrlStringToAttestationObjectConverter;
+import org.springframework.security.webauthn.converter.Base64UrlStringToCollectedClientDataConverter;
 import net.sharplab.springframework.security.webauthn.sample.app.formatter.AttestationObjectFormFormatter;
 import net.sharplab.springframework.security.webauthn.sample.app.formatter.CollectedClientDataFormFormatter;
 import org.springframework.context.annotation.Bean;

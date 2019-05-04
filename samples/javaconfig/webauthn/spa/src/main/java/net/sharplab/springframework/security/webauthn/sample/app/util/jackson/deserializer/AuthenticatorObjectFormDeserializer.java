@@ -19,7 +19,7 @@ package net.sharplab.springframework.security.webauthn.sample.app.util.jackson.d
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import net.sharplab.springframework.security.webauthn.converter.Base64UrlStringToAttestationObjectConverter;
+import org.springframework.security.webauthn.converter.Base64UrlStringToAttestationObjectConverter;
 import net.sharplab.springframework.security.webauthn.sample.app.api.AttestationObjectForm;
 import org.springframework.boot.jackson.JsonComponent;
 

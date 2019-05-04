@@ -18,11 +18,11 @@ package net.sharplab.springframework.security.fido.server.config.configurer;
 
 import com.webauthn4j.converter.util.JsonConverter;
 import net.sharplab.springframework.security.fido.server.endpoint.*;
-import net.sharplab.springframework.security.webauthn.WebAuthnRegistrationRequestValidator;
-import net.sharplab.springframework.security.webauthn.config.configurers.WebAuthnConfigurerUtil;
-import net.sharplab.springframework.security.webauthn.options.OptionsProvider;
-import net.sharplab.springframework.security.webauthn.server.ServerPropertyProvider;
-import net.sharplab.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
+import org.springframework.security.webauthn.WebAuthnRegistrationRequestValidator;
+import org.springframework.security.webauthn.config.configurers.WebAuthnConfigurerUtil;
+import org.springframework.security.webauthn.options.OptionsProvider;
+import org.springframework.security.webauthn.server.ServerPropertyProvider;
+import org.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;

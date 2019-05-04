@@ -17,7 +17,6 @@
 package net.sharplab.springframework.security.webauthn.sample.app.api.validator.spring;
 
 import com.webauthn4j.validator.exception.ValidationException;
-import net.sharplab.springframework.security.webauthn.WebAuthnRegistrationRequestValidator;
 import net.sharplab.springframework.security.webauthn.sample.app.api.AuthenticatorForm;
 import net.sharplab.springframework.security.webauthn.sample.app.api.ProfileCreateForm;
 import net.sharplab.springframework.security.webauthn.sample.app.api.validator.AuthenticatorFormValidator;

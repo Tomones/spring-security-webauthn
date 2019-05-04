@@ -16,7 +16,7 @@
 
 package net.sharplab.springframework.security.webauthn.sample.domain.entity;
 
-import net.sharplab.springframework.security.webauthn.userdetails.WebAuthnUserDetails;
+import org.springframework.security.webauthn.userdetails.WebAuthnUserDetails;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

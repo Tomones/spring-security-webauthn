@@ -17,7 +17,7 @@
 package net.sharplab.springframework.security.fido.server.util;
 
 import net.sharplab.springframework.security.fido.server.endpoint.ServerPublicKeyCredential;
-import net.sharplab.springframework.security.webauthn.exception.ConstraintViolationException;
+import org.springframework.security.webauthn.exception.ConstraintViolationException;
 
 public class BeanAssertUtil {
 

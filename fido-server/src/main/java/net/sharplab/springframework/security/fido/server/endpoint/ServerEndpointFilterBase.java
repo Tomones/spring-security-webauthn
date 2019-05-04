@@ -18,7 +18,7 @@ package net.sharplab.springframework.security.fido.server.endpoint;
 
 import com.webauthn4j.converter.util.JsonConverter;
 import com.webauthn4j.util.exception.WebAuthnException;
-import net.sharplab.springframework.security.webauthn.util.ExceptionUtil;
+import org.springframework.security.webauthn.util.ExceptionUtil;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;

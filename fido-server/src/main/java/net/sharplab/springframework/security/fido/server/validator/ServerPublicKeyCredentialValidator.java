@@ -20,7 +20,7 @@ import com.webauthn4j.util.Base64UrlUtil;
 import net.sharplab.springframework.security.fido.server.endpoint.ServerAuthenticatorResponse;
 import net.sharplab.springframework.security.fido.server.endpoint.ServerPublicKeyCredential;
 import net.sharplab.springframework.security.fido.server.util.BeanAssertUtil;
-import net.sharplab.springframework.security.webauthn.exception.BadCredentialIdException;
+import org.springframework.security.webauthn.exception.BadCredentialIdException;
 
 public class ServerPublicKeyCredentialValidator<T extends ServerAuthenticatorResponse> {
 

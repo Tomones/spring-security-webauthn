@@ -35,7 +35,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.Arrays;
 
@@ -64,7 +63,7 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     @Override
     public UserEntity findById(int id) {
         return userEntityRepository.findById(id)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
     }
 
     /**
@@ -89,7 +88,7 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     @Override
     public UserEntity createUser(UserEntity user) {
         userEntityRepository.findOneByEmailAddress(user.getEmailAddress()).ifPresent((retrievedUserEntity) -> {
-            throw new WebAuthnSampleBusinessException(ResultMessages.error().add(MessageCodes.Error.User.EMAIL_ADDRESS_IS_ALREADY_USED));
+            throw new WebAuthnSampleBusinessException(MessageCodes.Error.User.EMAIL_ADDRESS_IS_ALREADY_USED);
         });
         return userEntityRepository.save(user);
     }
@@ -101,7 +100,7 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     public void updateUser(UserEntity user) {
 
         UserEntity userEntity = userEntityRepository.findById(user.getId())
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
         userEntityRepository.save(userEntity);
     }
 
@@ -121,7 +120,7 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     @Override
     public void deleteUser(int id) {
         userEntityRepository.findById(id)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
         userEntityRepository.deleteById(id);
     }
 
@@ -162,7 +161,7 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     @Override
     public void addAuthenticator(String username, Authenticator authenticator) {
         UserEntity userEntity = userEntityRepository.findOneByEmailAddress(username)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
         AuthenticatorEntity authenticatorEntity = modelMapper.map(authenticator, AuthenticatorEntity.class);
         authenticatorEntity.setUser(userEntity);
         userEntity.getAuthenticators().add(authenticatorEntity);
@@ -171,20 +170,20 @@ public class UserManagerImpl implements UserManager, WebAuthnUserDetailsService 
     @Override
     public void removeAuthenticator(String username, Authenticator authenticator)  {
         UserEntity userEntity = userEntityRepository.findOneByEmailAddress(username)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
         boolean found = userEntity.getAuthenticators().remove(authenticator);
         if(!found){
-            throw new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authenticator.AUTHENTICATOR_NOT_FOUND));
+            throw new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authenticator.AUTHENTICATOR_NOT_FOUND);
         }
     }
 
     @Override
     public void removeAuthenticator(String username, byte[] credentialId)  {
         UserEntity userEntity = userEntityRepository.findOneByEmailAddress(username)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
         boolean found = userEntity.getAuthenticators().removeIf(item -> Arrays.equals(item.getAttestedCredentialData().getCredentialId(), credentialId));
         if(!found){
-            throw new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authenticator.AUTHENTICATOR_NOT_FOUND));
+            throw new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authenticator.AUTHENTICATOR_NOT_FOUND);
         }
     }
 

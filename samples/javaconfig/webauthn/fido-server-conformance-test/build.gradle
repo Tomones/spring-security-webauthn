@@ -48,8 +48,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
 
     //Terasoluna
-    compile("org.terasoluna.gfw:terasoluna-gfw-common:${terasolunaVersion}")
-    compile("org.terasoluna.gfw:terasoluna-gfw-web:${terasolunaVersion}")
+    compile("org.terasoluna.gfw:terasoluna-gfw-common:5.4.0.RELEASE")
+    compile("org.terasoluna.gfw:terasoluna-gfw-web:5.4.0.RELEASE")
 
     //Others
     compile("org.slf4j:jcl-over-slf4j")
@@ -68,6 +68,8 @@ dependencies {
     testCompile('junit:junit')
     testCompile('org.mockito:mockito-core')
     testCompile('org.assertj:assertj-core')
+    testCompile("org.dbunit:dbunit:${dbunitVersion}")
+    testCompile("com.github.springtestdbunit:spring-test-dbunit:${springTestDbunitVersion}")
     testCompile("org.dbunit:dbunit:${dbunitVersion}")
     testCompile("com.github.springtestdbunit:spring-test-dbunit:${springTestDbunitVersion}")
 

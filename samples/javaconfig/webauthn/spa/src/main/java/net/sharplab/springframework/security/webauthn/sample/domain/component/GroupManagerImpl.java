@@ -29,7 +29,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public GroupEntity findGroup(int groupId) {
         return groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
     }
 
     @Override
@@ -69,14 +68,14 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public List<UserEntity> findUsersInGroup(int groupId) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
         return groupEntity.getUsers();
     }
 
     @Override
     public List<UserEntity> findUsersInGroup(String groupName) {
         GroupEntity groupEntity = groupEntityRepository.findOneByGroupName(groupName)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
 
         return groupEntity.getUsers();
     }
@@ -94,7 +93,7 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public void renameGroup(int groupId, String newName) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
 
         groupEntity.setGroupName(newName);
     }
@@ -102,10 +101,10 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public void addUserToGroup(int userId, int groupId) {
         UserEntity userEntityEntity = userEntityRepository.findById(userId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.User.USER_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.User.USER_NOT_FOUND));
 
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
 
         groupEntity.getUsers().add(userEntityEntity);
     }
@@ -113,21 +112,21 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public void removeUserFromGroup(int userId, int groupId) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
         groupEntity.getUsers().remove(userId);
     }
 
     @Override
     public List<AuthorityEntity> findGroupAuthorities(int groupId) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
         return modelMapper.map(groupEntity.getAuthorities(), DomainTypeTokens.AuthorityEntityList);
     }
 
     @Override
     public void addGroupAuthority(int groupId, AuthorityEntity authority) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
         AuthorityEntity authorityEntityEntity = modelMapper.map(authority, AuthorityEntity.class);
         groupEntity.getAuthorities().add(authorityEntityEntity);
     }
@@ -135,9 +134,9 @@ public class GroupManagerImpl implements GroupManager {
     @Override
     public void removeGroupAuthority(int groupId, AuthorityEntity authority) {
         GroupEntity groupEntity = groupEntityRepository.findById(groupId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
         AuthorityEntity authorityEntityEntity = authorityEntityRepository.findById(authority.getId())
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND));
 
         groupEntity.getAuthorities().remove(authorityEntityEntity);
     }

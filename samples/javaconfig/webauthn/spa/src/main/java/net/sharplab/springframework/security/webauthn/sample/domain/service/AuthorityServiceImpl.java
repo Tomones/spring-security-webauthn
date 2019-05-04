@@ -30,10 +30,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 権限サービス
@@ -56,7 +54,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public AuthorityEntity findOne(Integer authorityId) {
         return authorityEntityRepository.findById(authorityId)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND));
     }
 
     @Override
@@ -84,13 +82,13 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public AuthorityEntity update(AuthorityEntity authorityEntity) {
         return authorityEntityRepository.findById(authorityEntity.getId()).orElseThrow(() ->
-                new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND)));
+                new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND));
     }
 
     @Override
     public AuthorityEntity update(AuthorityUpdateDto authorityUpdateDto) {
         AuthorityEntity retrievedAuthorityEntity = authorityEntityRepository.findById(authorityUpdateDto.getId())
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Authority.AUTHORITY_NOT_FOUND));
         List<UserEntity> userEntityList = userEntityRepository.findAllById(authorityUpdateDto.getUsers());
         List<GroupEntity> groupEntityList = groupEntityRepository.findAllById(authorityUpdateDto.getGroups());
         retrievedAuthorityEntity.setUsers(userEntityList);

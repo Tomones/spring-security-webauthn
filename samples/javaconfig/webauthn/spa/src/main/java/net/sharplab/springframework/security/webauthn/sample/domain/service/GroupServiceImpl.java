@@ -16,18 +16,15 @@
 
 package net.sharplab.springframework.security.webauthn.sample.domain.service;
 
-import net.sharplab.springframework.security.webauthn.sample.domain.constant.DomainTypeTokens;
 import net.sharplab.springframework.security.webauthn.sample.domain.constant.MessageCodes;
 import net.sharplab.springframework.security.webauthn.sample.domain.entity.GroupEntity;
 import net.sharplab.springframework.security.webauthn.sample.domain.exception.WebAuthnSampleEntityNotFoundException;
 import net.sharplab.springframework.security.webauthn.sample.domain.repository.GroupEntityRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.terasoluna.gfw.common.message.ResultMessages;
 
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class GroupServiceImpl implements GroupService {
     @Transactional(readOnly = true)
     public GroupEntity findOne(int id) {
         return groupEntityRepository.findById(id)
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
     }
 
     @Override
@@ -82,7 +79,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupEntity update(GroupEntity groupEntity) {
         return groupEntityRepository.findById(groupEntity.getId())
-                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(ResultMessages.error().add(MessageCodes.Error.Group.GROUP_NOT_FOUND)));
+                .orElseThrow(() -> new WebAuthnSampleEntityNotFoundException(MessageCodes.Error.Group.GROUP_NOT_FOUND));
     }
 
     @Override

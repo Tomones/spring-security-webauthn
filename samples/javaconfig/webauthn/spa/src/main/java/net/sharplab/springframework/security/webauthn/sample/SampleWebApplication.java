@@ -15,7 +15,6 @@
  */
 
 package net.sharplab.springframework.security.webauthn.sample;
-
 import net.sharplab.springframework.security.webauthn.sample.app.config.AppConfig;
 import net.sharplab.springframework.security.webauthn.sample.domain.config.DomainConfig;
 import net.sharplab.springframework.security.webauthn.sample.infrastructure.config.InfrastructureConfig;

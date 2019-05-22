@@ -17,9 +17,11 @@
 package net.sharplab.springframework.security.webauthn.sample.app.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 import com.webauthn4j.converter.util.CborConverter;
 import com.webauthn4j.converter.util.JsonConverter;
+import com.webauthn4j.data.extension.client.FIDOAppIDExtensionClientInput;
 import com.webauthn4j.metadata.converter.jackson.WebAuthnMetadataJSONModule;
 import com.webauthn4j.validator.WebAuthnAuthenticationContextValidator;
 import com.webauthn4j.validator.WebAuthnRegistrationContextValidator;
@@ -28,6 +30,10 @@ import net.sharplab.springframework.security.webauthn.challenge.ChallengeReposit
 import net.sharplab.springframework.security.webauthn.challenge.HttpSessionChallengeRepository;
 import net.sharplab.springframework.security.webauthn.options.OptionsProvider;
 import net.sharplab.springframework.security.webauthn.options.OptionsProviderImpl;
+import net.sharplab.springframework.security.webauthn.sample.cable.CableAuthenticationExtensionClientInput;
+import net.sharplab.springframework.security.webauthn.sample.cable.CableRegistrationExtensionAuthenticatorInput;
+import net.sharplab.springframework.security.webauthn.sample.cable.CableRegistrationExtensionAuthenticatorOutput;
+import net.sharplab.springframework.security.webauthn.sample.cable.CableRegistrationExtensionClientInput;
 import net.sharplab.springframework.security.webauthn.server.ServerPropertyProvider;
 import net.sharplab.springframework.security.webauthn.server.ServerPropertyProviderImpl;
 import net.sharplab.springframework.security.webauthn.userdetails.WebAuthnUserDetailsService;
@@ -102,13 +108,20 @@ public class WebSecurityBeanConfig {
     public JsonConverter jsonConverter(){
         ObjectMapper jsonMapper = new ObjectMapper();
         jsonMapper.registerModule(new WebAuthnMetadataJSONModule());
+        jsonMapper.registerSubtypes(new NamedType(CableRegistrationExtensionClientInput.class, CableRegistrationExtensionClientInput.ID));
+        jsonMapper.registerSubtypes(new NamedType(CableAuthenticationExtensionClientInput.class, CableAuthenticationExtensionClientInput.ID));
+
         ObjectMapper cborMapper = new ObjectMapper(new CBORFactory());
+        cborMapper.registerSubtypes(new NamedType(CableRegistrationExtensionAuthenticatorInput.class, CableRegistrationExtensionAuthenticatorInput.ID));
+        cborMapper.registerSubtypes(new NamedType(CableRegistrationExtensionAuthenticatorOutput.class, CableRegistrationExtensionAuthenticatorOutput.ID));
+
         return new JsonConverter(jsonMapper, cborMapper);
     }
 
     @Bean
     public CborConverter cborConverter(JsonConverter jsonConverter){
-        return jsonConverter.getCborConverter();
+        CborConverter cborConverter = jsonConverter.getCborConverter();
+        return cborConverter;
     }
 
     @Bean
